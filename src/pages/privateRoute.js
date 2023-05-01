@@ -12,11 +12,7 @@ function PrivateRoute({ children }) {
     }
   }, [router])
 
-  return (
-    <Auth>
-      {children}
-    </Auth>
-  )
+  return <Auth>{children}</Auth>
 }
 
 export default PrivateRoute

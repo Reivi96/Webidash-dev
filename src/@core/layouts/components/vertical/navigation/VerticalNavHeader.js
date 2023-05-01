@@ -33,6 +33,20 @@ const StyledLink = styled('a')({
   textDecoration: 'none'
 })
 
+const Img = styled('img')(({ theme }) => ({
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.down('lg')]: {
+      height: 450,
+      marginTop: theme.spacing(5)
+    },
+    [theme.breakpoints.down('md')]: {
+      height: 400
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: theme.spacing(3)
+    }
+  }))
+
 const VerticalNavHeader = props => {
   // ** Props
   const { verticalNavMenuBranding: userVerticalNavMenuBranding } = props
@@ -49,8 +63,8 @@ const VerticalNavHeader = props => {
           <StyledLink>
             
             <HeaderTitle variant='h6' sx={{ ml: 3 }}>
-            
-              {themeConfig.templateName}
+            <Img src='/images/webidoochain.png' alt={themeConfig.templateName} style={{ maxWidth: '100%', height: 'auto' }} />
+              
             </HeaderTitle>
           </StyledLink>
         </Link>
