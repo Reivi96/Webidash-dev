@@ -3,6 +3,7 @@ import { useState, Fragment } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // ** Fifrebasee
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -53,6 +54,20 @@ const LinkStyled = styled('a')(({ theme }) => ({
   color: theme.palette.primary.main
 }))
 
+const Img = styled('img')(({ theme }) => ({
+  marginBottom: theme.spacing(3),
+  [theme.breakpoints.down('lg')]: {
+    height: 450,
+    marginTop: theme.spacing(5)
+  },
+  [theme.breakpoints.down('md')]: {
+    height: 400
+  },
+  [theme.breakpoints.up('lg')]: {
+    marginTop: theme.spacing(25)
+  }
+}))
+
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   marginTop: theme.spacing(1.5),
   marginBottom: theme.spacing(4),
@@ -71,6 +86,7 @@ const RegisterPage = () => {
 
   // ** Hook
   const theme = useTheme()
+  const router = useRouter()
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -99,7 +115,7 @@ const RegisterPage = () => {
         // Signed in
         const user = userCredential.user
         console.log(user)
-        navigate('/pages/login')
+        router.push('/pages/login')
 
         // ...
       })
@@ -118,22 +134,11 @@ const RegisterPage = () => {
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg />
-            <Typography
-              variant='h6'
-              sx={{
-                ml: 3,
-                lineHeight: 1,
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                fontSize: '1.5rem !important'
-              }}
-            >
-              {themeConfig.templateName}
-            </Typography>
+            <Img alt='Stumptown Roasters' src='/images/webidoochain.png' style={{ maxWidth: '100%', height: 'auto' }} />
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              L'avventura inizia qui! 🚀
+              Inizia la tua avventura adesso🚀
             </Typography>
             <Typography variant='body2'>Utilizza il Web3 in modo semplice e intuitivo!</Typography>
           </Box>
@@ -151,11 +156,14 @@ const RegisterPage = () => {
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-register-password'>Password</InputLabel>
               <OutlinedInput
-                type='password'
+                type={values.showPassword ? 'text' : 'password'}
                 label='Create password'
                 value={password}
                 id='auth-register-password'
-                onChange={e => setPassword(e.target.value)}
+                onChange={e => {
+                  setPassword(e.target.value)
+                  handleChange('password')(e) // qui si chiama la funzione handleChange con il parametro 'password' e argomento 'e'
+                }}
                 endAdornment={
                   <InputAdornment position='end'>
                     <IconButton

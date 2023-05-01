@@ -67,7 +67,7 @@ const navigation = () => {
     {
       title: 'NFT Management',
       icon: FormatLetterCase,
-      path: '/'
+      path: '/cards'
     },
     {
       title: 'Rewards',

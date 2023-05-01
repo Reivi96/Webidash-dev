@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent'
 import VisualizzaSaldo from 'src/views/Loyalty/Saldo'
 import AggiungiPunti from 'src/views/Loyalty/AggiungiPunti'
 import RimuoviPunti from 'src/views/Loyalty/RimuoviPunti'
+import CreaNft from 'src/views/Loyalty/CreaNft'
 
 const Widgetunicoloyalty = () => {
   // ** State
@@ -29,16 +30,20 @@ const Widgetunicoloyalty = () => {
           <Tab value='1' label='Visualizza Saldo' />
           <Tab value='2' label='Aggiungi Punti' />
           <Tab value='3' label='Rimuovi Punti' />
+          <Tab value='4' label='Crea NFT' />
         </TabList>
         <CardContent sx={{ textAlign: 'center' }}>
-          <TabPanel value='1' sx={{ p: 0 }}>           
-              <VisualizzaSaldo />
+          <TabPanel value='1' sx={{ p: 0 }}>
+            <VisualizzaSaldo />
           </TabPanel>
           <TabPanel value='2' sx={{ p: 0 }}>
             <AggiungiPunti />
           </TabPanel>
           <TabPanel value='3' sx={{ p: 0 }}>
             <RimuoviPunti />
+          </TabPanel>
+          <TabPanel value='4' sx={{ p: 0 }}>
+            <CreaNft />
           </TabPanel>
         </CardContent>
       </TabContext>

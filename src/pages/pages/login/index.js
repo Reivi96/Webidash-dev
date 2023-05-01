@@ -84,7 +84,19 @@ const LoginPage = () => {
     event.preventDefault()
   }
 
-  const webilogo = 'public/webilogo.png'
+  const Img = styled('img')(({ theme }) => ({
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.down('lg')]: {
+      height: 450,
+      marginTop: theme.spacing(5)
+    },
+    [theme.breakpoints.down('md')]: {
+      height: 400
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: theme.spacing(3)
+    }
+  }))
 
   // Login
 
@@ -113,22 +125,11 @@ const LoginPage = () => {
       <Card sx={{ zIndex: 1 }}>
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography
-              variant='h6'
-              sx={{
-                ml: 3,
-                lineHeight: 1,
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                fontSize: '1.5rem !important'
-              }}
-            >
-              {themeConfig.templateName}
-            </Typography>
+            <Img alt='Stumptown Roasters' src='/images/webidoochain.png' style={{ maxWidth: '100%', height: 'auto' }} />
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Benvenuto su {themeConfig.templateName}!👋🏻👋🏻👋🏻
+              Benvenuto sula tua Dashboard!👋🏻👋🏻
             </Typography>
             <Typography variant='body2'>Effettua il login e goditi la tua avventura nel Web3!</Typography>
           </Box>
@@ -148,9 +149,13 @@ const LoginPage = () => {
               <OutlinedInput
                 name='password'
                 label='password'
+                value={values.password}
                 id='password'
-                onChange={e => setPassword(e.target.value)}
-                type='password'
+                onChange={e => {
+                  setPassword(e.target.value)
+                  handleChange('password')(e) // qui si chiama la funzione handleChange con il parametro 'password' e argomento 'e'
+                }}
+                type={values.showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position='end'>
                     <IconButton

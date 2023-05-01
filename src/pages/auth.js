@@ -14,7 +14,7 @@ function Auth({ children }) {
     }
   }, [router]);
 
-  // Controlla se l'applicazione è in esecuzione nel browser prima di utilizzare sessionStorage
+  // Controllaa se l'applicazione è in esecuzione nel browser prima di utilizzare sessionStorage
   const uid = typeof window !== 'undefined' ? sessionStorage.getItem('uid') : null;
 
   // Restituisci il contenuto del componente figlio solo se l'utente è autenticato
